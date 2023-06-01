@@ -54,6 +54,10 @@
   background-color: rgb(20, 228, 13);
 }
 
+.card-description {
+  margin-bottom: 12px;
+}
+
 .bingo-card:nth-child(5n) {
   border-right:none;
 }

@@ -1,38 +1,31 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
+import { Card } from './components/BingoCard'
 import { tabsConditions } from './gameConditions'
-import {Grid} from '@mui/material';
-import { TextField } from '@mui/material';
-import { Button } from '@mui/material';
+import { Grid, TextField, Button } from '@mui/material';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   const [playerName, setPlayerName] = useState<string>('Nameless Scum')
+  const [editedConfig, setEditedConfig] = useState<string>()
   const [bingoCards, setBingoCards] = useState<string[]>([])
+  const [configShown, setConfigShown] = useState<boolean>(false)
   //TODO Implement check for maybe multiple games?
-  const conditionList = tabsConditions.slice()
+  let conditionList: string[] = tabsConditions.slice()
 
-    const getRandomNumber = (maxValue: number): number => {
+  const getRandomNumber = (maxValue: number): number => {
     return Math.floor(Math.random() * maxValue)
   }
 
-  //TODO: Export to a separate bingo card component file probably
-
-  const handleCardClicked = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log('card clicked', e.target)
-    e.currentTarget.classList.toggle('card-clicked')
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPlayerName(e.target.value)
   }
 
-  interface BingoCard {
-    card: string
-  }
+  const handleGenerateClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(`Generating bingo board for ${playerName}`)
+    console.log('conditions', conditionList)
+        console.log('conditions', conditionList)
 
-  const Card: FC<BingoCard> = ({card}) => {
-    return <Grid item xs={2.4} onClick={handleCardClicked} className='bingo-card'>{card}</Grid>
-
-  }
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(`Generating for bing card for ${playerName}`)
     if (bingoCards.length >= 25 ) {
       setBingoCards([])
     }
@@ -41,12 +34,18 @@ function App() {
       setBingoCards(prevValues => [...prevValues ,randomItem])
       conditionList.splice(conditionList.indexOf(randomItem), 1)
     }
-    console.log('bingo cards', bingoCards)
+  }
 
+  const handleEditClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setConfigShown(!configShown)
   }
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPlayerName(e.target.value)
+
+  const handleSaveClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(editedConfig?.split(','))
+    conditionList = editedConfig?.split(',') ?? conditionList
+    //setConfigShown(false)
   }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -56,19 +55,38 @@ function App() {
             <p>Meaty's TABS Bingo</p>
               <TextField type='text' placeholder='John Souls' variant='filled' label="Player Name" onChange={handleInputChange} />
               <div className="button">
-                <Button className="button" variant="contained" onClick={handleButtonClick}>Generate bingo cards</Button>
+                <Button className="button" variant="contained" onClick={handleGenerateClicked}>Generate bingo cards</Button>
               </div>
+              { /* TODO: Maybe add later
+              <div className="button">
+                <Button className="button" color="secondary" variant="contained" onClick={handleEditClicked}>{configShown ? 'Hide Config' : 'Edit Config'} </Button>
+              </div>
+              */}
+              {configShown && (
+                <>
+                  <textarea value={editedConfig || conditionList} rows={15} cols={50} onChange={(e) => setEditedConfig(e.target.value)} />
+                  <div className="button">
+                    <Button className="button" variant="contained" color="success" onClick={handleSaveClicked}>Save Config</Button>
+                  </div>
+                </>
+              )}
           </>
-        ) : (<>
-          <p>Meaty's TABS Bingo</p>
-          <p>{playerName}'s Bingo</p>
+        ) : (
+        <>
+          <Grid container spacing={1.5} className='card-description'>
+            <Grid item xs={12}>Meaty's TABS Bingo</Grid>
+            <Grid item xs={12}>{playerName}'s Bingo</Grid>
+          </Grid>
+          <Grid container className='bingo-board'>
+            {bingoCards.map((c, index) => <Card card={c} key={index}/>)}
+          </Grid>
+          <div className="button">
+            <Button variant="contained" onClick={handleGenerateClicked}>Re-generate</Button>
+          </div>
+          <div className="button">
+            <Button variant="contained" onClick={() => {setBingoCards([])}}>Back</Button>
+          </div>
 
-            <Grid container spacing={2} className='bingo-board'>
-              {bingoCards.map((c, index) => <Card card={c} key={index}/>)}
-            </Grid>
-            <div className="button">
-              <Button variant="contained" onClick={handleButtonClick}>Re-generate</Button>
-            </div>
           
           </>
         )}        
