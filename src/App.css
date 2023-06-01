@@ -29,12 +29,14 @@
 }
 
 .bingo-board {
+  background-color:#202227;
   max-width: 720px;
   border-radius: 5px;
   border-top: 15px solid black;
   border-right: 5px solid black;
   border-left: 5px solid black;
   border-bottom: 5px solid black;
+
 }
 
 .bingo-card {
@@ -44,6 +46,12 @@
   min-height: 125px;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+  padding: 16px;
+
+}
+
+.card-clicked {
+  background-color: rgb(20, 228, 13);
 }
 
 .bingo-card:nth-child(5n) {
