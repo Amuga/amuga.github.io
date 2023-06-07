@@ -10,7 +10,11 @@ function App() {
   const [editedConfig, setEditedConfig] = useState<string>()
   const [bingoCards, setBingoCards] = useState<string[]>([])
   const [configShown, setConfigShown] = useState<boolean>(false)
-  //TODO Implement check for maybe multiple games?
+  /*TODO List:
+     Implement check for maybe multiple games?
+     Export board and maybe start view into separate components
+  */
+  
   let conditionList: string[] = tabsConditions.slice()
 
   const getRandomNumber = (maxValue: number): number => {
@@ -72,24 +76,22 @@ function App() {
               )}
           </>
         ) : (
-        <>
-          <Grid container spacing={1.5} className='card-description'>
-            <Grid item xs={12}>Meaty's TABS Bingo</Grid>
-            <Grid item xs={12}>{playerName}'s Bingo</Grid>
-          </Grid>
-          <Grid container className='bingo-board'>
-            {bingoCards.map((c, index) => <Card card={c} key={index}/>)}
-          </Grid>
-          <div className="button">
-            <Button variant="contained" onClick={handleGenerateClicked}>Re-generate</Button>
-          </div>
-          <div className="button">
-            <Button variant="contained" onClick={() => {setBingoCards([])}}>Back</Button>
-          </div>
-
-          
+          <>
+            <Grid container spacing={1.5} className='card-description'>
+              <Grid item xs={12}>Meaty's TABS Bingo</Grid>
+              <Grid item xs={12}>{playerName}'s Bingo</Grid>
+            </Grid>
+            <Grid container className='bingo-board'>
+              {bingoCards.map((c, index) => <Card card={c} key={index}/>)}
+            </Grid>
+            <div className="button">
+              <Button variant="contained" onClick={handleGenerateClicked}>Re-generate</Button>
+            </div>
+            <div className="button">
+              <Button variant="contained" onClick={() => {setBingoCards([])}}>Back</Button>
+            </div>
           </>
-        )}        
+        )}
         <p className="credits">Created by Amuga</p>
       </header>
     </div>
