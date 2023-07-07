@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Card } from './components/BingoCard'
+import { StartPage } from './components/StartScreen'
+import { BingoBoard } from './components/BingoBoard';
 import { tabsConditions } from './gameConditions'
-import { Grid, TextField, Button } from '@mui/material';
+import { Grid,  Button } from '@mui/material';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,7 +13,6 @@ function App() {
   const [configShown, setConfigShown] = useState<boolean>(false)
   /*TODO List:
      Implement check for maybe multiple games?
-     Export board and maybe start view into separate components
   */
   
   let conditionList: string[] = tabsConditions.slice()
@@ -55,42 +55,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {bingoCards.length < 25 ? (
-          <>
-            <p>Meaty's TABS Bingo</p>
-              <TextField type='text' placeholder='John Souls' variant='filled' label="Player Name" onChange={handleInputChange} />
-              <div className="button">
-                <Button className="button" variant="contained" onClick={handleGenerateClicked}>Generate bingo cards</Button>
-              </div>
-              { /* TODO: Maybe add later
-              <div className="button">
-                <Button className="button" color="secondary" variant="contained" onClick={handleEditClicked}>{configShown ? 'Hide Config' : 'Edit Config'} </Button>
-              </div>
-              */}
-              {configShown && (
-                <>
-                  <textarea value={editedConfig || conditionList} rows={15} cols={50} onChange={(e) => setEditedConfig(e.target.value)} />
-                  <div className="button">
-                    <Button className="button" variant="contained" color="success" onClick={handleSaveClicked}>Save Config</Button>
-                  </div>
-                </>
-              )}
-          </>
+          <StartPage onInputChanged={handleInputChange} onButtonClicked={handleGenerateClicked} />
         ) : (
-          <>
-            <Grid container spacing={1.5} className='card-description'>
-              <Grid item xs={12}>Meaty's TABS Bingo</Grid>
-              <Grid item xs={12}>{playerName}'s Bingo</Grid>
-            </Grid>
-            <Grid container className='bingo-board'>
-              {bingoCards.map((c, index) => <Card card={c} key={index}/>)}
-            </Grid>
-            <div className="button">
-              <Button variant="contained" onClick={handleGenerateClicked}>Re-generate</Button>
-            </div>
-            <div className="button">
-              <Button variant="contained" onClick={() => {setBingoCards([])}}>Back</Button>
-            </div>
-          </>
+          <BingoBoard onButtonClicked={handleGenerateClicked} onBack={() => {setBingoCards([])}} cards={bingoCards} name={playerName} />
         )}
         <p className="credits">Created by Amuga</p>
       </header>
