@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StartPage } from './components/StartScreen'
 import { BingoBoard } from './components/BingoBoard';
 import { tabsConditions } from './gameConditions'
-import { Grid,  Button } from '@mui/material';
 import logo from './logo.svg';
 import './App.css';
 
