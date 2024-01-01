@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StartPage } from './components/StartScreen'
 import { BingoBoard } from './components/BingoBoard';
-import { tabsConditions } from './gameConditions'
+import { conditions } from './gameConditions'
 import logo from './logo.svg';
 import './App.css';
 
@@ -10,11 +10,12 @@ function App() {
   const [editedConfig, setEditedConfig] = useState<string>()
   const [bingoCards, setBingoCards] = useState<string[]>([])
   const [configShown, setConfigShown] = useState<boolean>(false)
+  const [listType, setListType] = useState <string>('tabs')
   /*TODO List:
      Implement check for maybe multiple games?
   */
   
-  let conditionList: string[] = tabsConditions.slice()
+  let conditionList: string[] = conditions[listType].slice()
 
   const getRandomNumber = (maxValue: number): number => {
     return Math.floor(Math.random() * maxValue)
@@ -23,6 +24,10 @@ function App() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerName(e.target.value)
   }
+
+  const handleRadioClicked = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setListType(e.target.value)
+  } 
 
   const handleGenerateClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(`Generating bingo board for ${playerName}`)
@@ -54,9 +59,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {bingoCards.length < 25 ? (
-          <StartPage onInputChanged={handleInputChange} onButtonClicked={handleGenerateClicked} />
+          <StartPage onInputChanged={handleInputChange} onButtonClicked={handleGenerateClicked} onRadioClicked={handleRadioClicked} />
         ) : (
-          <BingoBoard onButtonClicked={handleGenerateClicked} onBack={() => {setBingoCards([])}} cards={bingoCards} name={playerName} />
+          <BingoBoard onButtonClicked={handleGenerateClicked} onBack={() => {setBingoCards([])}} cards={bingoCards} name={playerName} type={listType} />
         )}
         <p className="credits">Created by Amuga</p>
       </header>

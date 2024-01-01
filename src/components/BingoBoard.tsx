@@ -7,16 +7,17 @@ interface Board {
     onBack: (e: React.MouseEvent<HTMLButtonElement>) => void
     name: string
     cards: string[]
+    type: string
   }
 
-export const BingoBoard: FC <Board>= ({ onButtonClicked, onBack, cards, name }) => {
+export const BingoBoard: FC <Board>= ({ onButtonClicked, onBack, cards, name, type }) => {
 
 
     return (
         <>
             <Grid container spacing={1.5} className='card-description'>
-                <Grid item xs={12}>Meaty's TABS Bingo</Grid>
-                <Grid item xs={12}>{name}'s Bingo</Grid>
+                <Grid item xs={12}>{type.toUpperCase()} Bingo</Grid>
+                <Grid item xs={12}>{name}'s card</Grid>
             </Grid>
             <Grid container className='bingo-board'>
                 {cards.map((c, index) => <Card card={c} key={index}/>)}
