@@ -19,7 +19,7 @@ export const BingoBoard: FC <Board>= ({ onButtonClicked, onBack, cards, name, ty
                 <Grid item xs={12}>{type.toUpperCase()} Bingo</Grid>
                 <Grid item xs={12}>{name}'s card</Grid>
             </Grid>
-            <Grid container className='bingo-board'>
+            <Grid container className={`bingo-board ${type}`}>
                 {cards.map((c, index) => <Card card={c} key={index}/>)}
             </Grid>
             <div className="button">

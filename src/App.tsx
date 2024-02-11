@@ -10,12 +10,9 @@ function App() {
   const [editedConfig, setEditedConfig] = useState<string>()
   const [bingoCards, setBingoCards] = useState<string[]>([])
   const [configShown, setConfigShown] = useState<boolean>(false)
-  const [listType, setListType] = useState <string>('tabs')
-  /*TODO List:
-     Implement check for maybe multiple games?
-  */
+  const [listType, setListType] = useState <string>('')
   
-  let conditionList: string[] = conditions[listType].slice()
+  let conditionList: string[] = conditions[listType]?.slice()
 
   const getRandomNumber = (maxValue: number): number => {
     return Math.floor(Math.random() * maxValue)
@@ -37,10 +34,14 @@ function App() {
     if (bingoCards.length >= 25 ) {
       setBingoCards([])
     }
-    for (let i: number = 0; i < 25 ; i++) {
-      const randomItem: string = conditionList[getRandomNumber(conditionList.length)]
-      setBingoCards(prevValues => [...prevValues ,randomItem])
-      conditionList.splice(conditionList.indexOf(randomItem), 1)
+    if (listType) {
+      for (let i: number = 0; i < 25 ; i++) {
+        const randomItem: string = conditionList[getRandomNumber(conditionList.length)]
+        setBingoCards(prevValues => [...prevValues ,randomItem])
+        conditionList.splice(conditionList.indexOf(randomItem), 1)
+      }
+    } else {
+      alert('Select a type, dummy')
     }
   }
 
@@ -59,7 +60,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {bingoCards.length < 25 ? (
-          <StartPage onInputChanged={handleInputChange} onButtonClicked={handleGenerateClicked} onRadioClicked={handleRadioClicked} />
+          <StartPage onInputChanged={handleInputChange} onButtonClicked={handleGenerateClicked} onRadioClicked={handleRadioClicked} type={listType} />
         ) : (
           <BingoBoard onButtonClicked={handleGenerateClicked} onBack={() => {setBingoCards([])}} cards={bingoCards} name={playerName} type={listType} />
         )}

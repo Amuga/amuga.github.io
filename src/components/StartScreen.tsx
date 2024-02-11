@@ -6,9 +6,10 @@ interface Page {
     onInputChanged: (e: React.ChangeEvent<HTMLInputElement>) => void
     onButtonClicked: (e: React.MouseEvent<HTMLButtonElement>) => void
     onRadioClicked: (e: React.ChangeEvent<HTMLInputElement>) => void
+    type: string
   }
 
-export const StartPage: FC <Page>= ({onInputChanged, onButtonClicked, onRadioClicked}) => {
+export const StartPage: FC <Page>= ({onInputChanged, onButtonClicked, onRadioClicked, type}) => {
     const [configShown, setConfigShown] = useState<boolean>(false)
     const [editedConfig, setEditedConfig] = useState<string>()
     return (
@@ -18,8 +19,8 @@ export const StartPage: FC <Page>= ({onInputChanged, onButtonClicked, onRadioCli
                 <FormLabel id="demo-radio-buttons-group-label">Bingo Type</FormLabel>
                 <RadioGroup
                     aria-labelledby="radio-buttons-group-label"
-                    defaultValue="tabs"
                     name="radio-buttons-group"
+                    defaultValue={type}
                 >
                     <FormControlLabel value="tabs" control={<Radio onChange={onRadioClicked} />} label="They Are Billions" />
                     <FormControlLabel value="horror" control={<Radio onChange={onRadioClicked} />} label="Generic Indie Horror" />
