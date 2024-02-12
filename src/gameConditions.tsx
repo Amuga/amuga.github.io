@@ -5,12 +5,13 @@ export const conditions: { [key: string]: string[] } = {
     'Soldier on doomtown side start','5 volcano stack','Harpy ranger pull','Double taco trucks','3 gold one stack',
     '3 zombies one Scratching post','stuck giant','No wood >4','Mayor joke','spinning muton','Koi pond!',
     'over 100 gold mine', 'Great lake', 'Barracks before Woodshop'],
-    horror: ['find fuses', 'start generator', 'random ball rolling by', 'way too loud jumpscare', '"turn around!" -moment',
+    horror: ['find fuses', 'start generator', 'random ball rolling by', 'way too loud jumpscare', '"turn around!" moment',
     'flashlight starts flickering', 'scary noises without a source', 'power outtage', 'creepy little girl', 'phasmo assets', 'self-induced jumpscare', 'bloody handprints',
     'benny hill theme chase', 'creepy phone call', 'environment changes when you look away (layers of fear special)', 'Dr. Who angels (in any form)', 'cursed dolls or mannequins',
     'Old scary paintings no one would own', 'follow the blood', 'Go into the basement', 'Go to the attic', 'Hidden item that nobody would hide', 'Thunder', 'MC is an alcoholic asshole',
     'Sewer level', '4 digit code lock', 'Crowbar', 'Chains', 'Meat hooks', 'Exploding light bulb', 'Broken Mirrors', 'Creepy figure standing in the distance', 'Fog/Mist',
-    'Creaking door opening slowly', 'blood writing', 'Barricaded doors or windows', 'Impossible puzzle set-ups'
+    'Creaking door opening slowly', 'blood writing', 'Barricaded doors or windows', 'Impossible puzzle set-ups', 'perform a ritual', 'tv/radio static', 'ratJAM', 'crows', 'sheet ghost',
+    'baby screams/cry', 'dead phone/no signal' 
    ]
 
 }
