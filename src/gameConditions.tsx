@@ -11,7 +11,7 @@ export const conditions: { [key: string]: string[] } = {
     'Old scary paintings no one would own', 'follow the blood', 'Go into the basement', 'Go to the attic', 'Hidden item that nobody would hide', 'Thunder', 'MC is an alcoholic asshole',
     'Sewer level', '4 digit code lock', 'Crowbar', 'Chains', 'Meat hooks', 'Exploding light bulb', 'Broken Mirrors', 'Creepy figure standing in the distance', 'Fog/Mist',
     'Creaking door opening slowly', 'blood writing', 'Barricaded doors or windows', 'Impossible puzzle set-ups', 'perform a ritual', 'tv/radio static', 'ratJAM', 'crows', 'sheet ghost',
-    'baby screams/cry', 'dead phone/no signal' 
+    'baby screams/cry', 'dead phone/no signal', 'Hunting trophy', 'Secret room', 'Music box', 'VHS tapes', 'Locked in a room', 'Door knock/rattle', 'Cuckoo clock', 'Masks' 
    ]
 
 }
